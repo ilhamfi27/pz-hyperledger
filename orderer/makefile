@@ -1,11 +1,11 @@
 SHELL=/bin/bash
 
 orderer-start:
-	docker compose -f docker/docker-compose.yml up -d orderer.example.com
+	docker compose -f docker/docker-compose.yml up -d orderer.zillabc.io
 
 orderer-down:
-	docker compose -f docker/docker-compose.yml stop orderer.example.com
-	docker compose -f docker/docker-compose.yml rm -f orderer.example.com
+	docker compose -f docker/docker-compose.yml stop orderer.zillabc.io
+	docker compose -f docker/docker-compose.yml rm -f orderer.zillabc.io
 	docker compose -f docker/docker-compose.yml stop ca_orderer
 	docker compose -f docker/docker-compose.yml rm -f ca_orderer
 	docker compose -f docker/docker-compose.yml up cert-remover

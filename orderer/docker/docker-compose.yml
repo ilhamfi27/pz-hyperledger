@@ -6,7 +6,7 @@
 version: '3.7'
 
 volumes:
-  orderer.example.com:
+  orderer.zillabc.io:
 
 networks:
   internal-peer:
@@ -14,8 +14,8 @@ networks:
 
 services:
 
-  orderer.example.com:
-    container_name: orderer.example.com
+  orderer.zillabc.io:
+    container_name: orderer.zillabc.io
     restart: unless-stopped
     image: hyperledger/fabric-orderer:2.2.11
     labels:
@@ -42,15 +42,15 @@ services:
       - ORDERER_ADMIN_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
       - ORDERER_ADMIN_TLS_CLIENTROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
       - ORDERER_ADMIN_LISTENADDRESS=0.0.0.0:7053
-      - ORDERER_OPERATIONS_LISTENADDRESS=orderer.example.com:9443
+      - ORDERER_OPERATIONS_LISTENADDRESS=orderer.zillabc.io:9443
       - ORDERER_METRICS_PROVIDER=prometheus
     working_dir: /root
     # entrypoint: tail -f /dev/null
     command: orderer
     volumes:
-        - ../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/:/var/hyperledger/orderer/msp
-        - ../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/:/var/hyperledger/orderer/tls
-        - orderer.example.com:/var/hyperledger/production/orderer
+        - ../organizations/ordererOrganizations/zillabc.io/orderers/orderer.zillabc.io/msp/:/var/hyperledger/orderer/msp
+        - ../organizations/ordererOrganizations/zillabc.io/orderers/orderer.zillabc.io/tls/:/var/hyperledger/orderer/tls
+        - orderer.zillabc.io:/var/hyperledger/production/orderer
     ports:
       - 7050:7050
       - 7053:7053
