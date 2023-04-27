@@ -1,4 +1,3 @@
-$CONTAINER
 function createChannel() {
   # Bring up the network if it is not already up.
   bringUpNetwork="false"

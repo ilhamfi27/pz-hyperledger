@@ -29,7 +29,7 @@ orderer-up:
 	make orderer-start
 
 channel-create:
-	. channel.sh
+	. scripts/prepareChannel.sh
 	. scripts/createChannel.sh $(channel) $(cli_delay) $(max_retry) $(verbose)
 
 service-stop: orderer-down
