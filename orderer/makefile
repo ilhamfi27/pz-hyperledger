@@ -5,6 +5,7 @@ max_retry = 5
 verbose = true
 
 export FABRIC_CFG_PATH=${PWD}/configtx
+export CONTAINER_CLI=docker
 
 orderer-start:
 	docker compose -f docker/docker-compose.yml up -d orderer.zillabc.io
@@ -29,5 +30,7 @@ orderer-up:
 
 channel-create:
 	. channel.sh
-	sleep 3
 	. scripts/createChannel.sh $(channel) $(cli_delay) $(max_retry) $(verbose)
+
+service-stop: orderer-down
+service-start: orderer-up
