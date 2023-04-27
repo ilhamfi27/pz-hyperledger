@@ -4,4 +4,8 @@
 **/organizations/fabric-ca/ordererOrg/*.pem
 **/organizations/fabric-ca/ordererOrg/*Key
 **/organizations/fabric-ca/ordererOrg/msp
+**/channel-artifacts
+
 bin
+
+log.txt

@@ -1,4 +1,10 @@
-SHELL=/bin/bash
+SHELL = /bin/bash
+channel = mychannel
+cli_delay = 3
+max_retry = 5
+verbose = true
+
+export FABRIC_CFG_PATH=${PWD}/configtx
 
 orderer-start:
 	docker compose -f docker/docker-compose.yml up -d orderer.zillabc.io
@@ -13,10 +19,15 @@ orderer-down:
 
 orderer-generate-org:
 	docker compose -f docker/docker-compose.yml up -d ca_orderer
-	sleep 5
+	sleep 3
 	. organizations/fabric-ca/registerEnroll.sh
 
 orderer-up:
 	make orderer-generate-org
-	sleep 5
+	sleep 3
 	make orderer-start
+
+channel-create:
+	. channel.sh
+	sleep 3
+	. scripts/createChannel.sh $(channel) $(cli_delay) $(max_retry) $(verbose)
