@@ -1,3 +1,7 @@
-organizations/ordererOrganizations
-organizations/peerOrganizations
+**/organizations/ordererOrganizations
+**/organizations/peerOrganizations
+**/organizations/fabric-ca/ordererOrg/*.db
+**/organizations/fabric-ca/ordererOrg/*.pem
+**/organizations/fabric-ca/ordererOrg/*Key
+**/organizations/fabric-ca/ordererOrg/msp
 bin

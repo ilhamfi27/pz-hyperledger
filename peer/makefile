@@ -1,8 +1,5 @@
 SHELL=/bin/bash
 
-ps:
-	docker compose ps
-
 orderer-start:
 	docker compose up -d orderer.example.com
 
@@ -16,10 +13,3 @@ orderer-generate-org:
 orderer-up:
 	make orderer-generate-org
 	make orderer-start
-
-generate-orgs:
-	bin/cryptogen generate --config=./organizations/cryptogen/crypto-config-org1.yaml --output="organizations"
-	bin/cryptogen generate --config=./organizations/cryptogen/crypto-config-org2.yaml --output="organizations"
-
-generate-ccp:
-	./organizations/ccp-generate.sh
