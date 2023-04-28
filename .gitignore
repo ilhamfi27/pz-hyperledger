@@ -6,6 +6,8 @@
 **/organizations/fabric-ca/ordererOrg/msp
 **/channel-artifacts
 
+ca/generated-ca
+
 bin
 
 log.txt
