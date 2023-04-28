@@ -1,0 +1,45 @@
+version: '3.7'
+
+networks:
+  internal-peer:
+    name: internal-peer
+
+services:
+
+  ca_orderer:
+    image: hyperledger/fabric-ca:1.5.6
+    restart: unless-stopped
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-orderer
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=9054
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:19054
+    ports:
+      - "9054:9054"
+      - "19054:19054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/ordererOrg:/etc/hyperledger/fabric-ca-server
+    container_name: ca_orderer
+    networks:
+      - internal-peer
+
+  cert-remover:
+    image: alpine
+    command: |
+      rm -rf organizations/fabric-ca/ordererOrg/msp
+      rm -f organizations/fabric-ca/ordererOrg/ca-cert.pem
+      rm -f organizations/fabric-ca/ordererOrg/fabric-ca-server.db
+      rm -f organizations/fabric-ca/ordererOrg/IssuerPublicKey
+      rm -f organizations/fabric-ca/ordererOrg/IssuerRevocationPublicKey
+      rm -f organizations/fabric-ca/ordererOrg/tls-cert.pem
+      rm -rf organizations/ordererOrganizations
+      rm -rf organizations/peerOrganizations
+    working_dir: /root
+    volumes:
+      - ../:/root
+    networks:
+      - internal-peer
